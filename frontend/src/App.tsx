@@ -1,9 +1,10 @@
+import Youtube from "./components/Youtube";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <div>sat</div>
+      <Youtube />
     </>
   );
 }
