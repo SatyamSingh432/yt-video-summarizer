@@ -28,7 +28,7 @@ export const getVideoInfo = async (req: Request, res: Response) => {
 
     if (!video) res.status(404).json({ error: "Video not found" });
 
-    const { title, thumbnails } = video.snippet;
+    const { title, thumbnails, description, tags } = video.snippet;
 
     const duration = video.contentDetails.duration;
 
@@ -36,8 +36,11 @@ export const getVideoInfo = async (req: Request, res: Response) => {
       title,
       thumbnail: thumbnails.medium.url,
       duration,
+      description,
+      tags,
     });
   } catch (err) {
+    console.log("Error fetching video info:", err);
     res.status(500).json({ error: "Failed to fetch video info" });
   }
 };

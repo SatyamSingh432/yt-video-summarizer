@@ -1,10 +1,9 @@
-import { useAuth } from "../context/AuthContext";
-import { api } from "../lib/api";
-
 type VideoMetadataProps = {
   title: string | undefined;
   thumbnail: string | undefined;
   duration: string | undefined;
+  getVideoSummary: () => void;
+  loading: boolean;
 };
 
 function formatDuration(isoDuration: string): string {
@@ -19,8 +18,9 @@ export default function VideoMetadata({
   title,
   thumbnail,
   duration,
+  getVideoSummary,
+  loading,
 }: VideoMetadataProps) {
-  const { token } = useAuth();
   return (
     <div
       style={{
@@ -39,19 +39,10 @@ export default function VideoMetadata({
       {duration && <p>Duration: {formatDuration(duration)}</p>}
 
       <button
+        disabled={loading}
         onClick={() => {
-          api.post(
-            "video/summarize",
-            {
-              transcript: title,
-              videoTitle: title,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          console.log("Summarizing video:", title);
+          getVideoSummary();
         }}
       >
         Summarize
