@@ -6,6 +6,7 @@ import axios from "axios";
 
 import infoRouter from "./routes/videoinfo.routes.ts";
 import authRouter from "./routes/auth.route.ts";
+import userRouter from "./routes/user.route.ts";
 
 // dotenv.config();
 const app = express();
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/video", infoRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 const PORT = parseInt(process.env.PORT || "8080", 10);
 

@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
       if (data) {
         setIsLoggedIn(true);
         setUser(data);
-        navigate("/");
         // getUserData();
       } else {
         console.log("WHYY");

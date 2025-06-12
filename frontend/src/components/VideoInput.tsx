@@ -15,25 +15,36 @@ export default function VideoInput({
   const [url, setUrl] = useState("");
 
   return (
-    <div>
+    <div className="max-w-xl mx-auto p-6">
       <form
         onSubmit={(e) => {
           getVideoMetaData(e, url);
           setUrl("");
         }}
+        className="space-y-4"
       >
-        <label htmlFor="youtube-url">Input Youtube URL</label>
+        <label
+          htmlFor="youtube-url"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Input YouTube URL
+        </label>
         <input
           id="youtube-url"
           type="text"
           placeholder="Paste YouTube URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button type="submit">Get Data</button>
+        <button
+          type="submit"
+          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Get Data
+        </button>
       </form>
-
-      {loading && <div>Loading.....</div>}
+      {loading && <div className="mt-4 text-sm text-gray-600">Loading…</div>}
     </div>
   );
 }

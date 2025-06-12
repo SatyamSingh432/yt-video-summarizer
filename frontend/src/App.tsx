@@ -5,12 +5,14 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 
 import Navbar from "./components/Navbar";
+import PastSummaries from "./pages/PastSummaries";
 
 const App = () => (
   <>
     <Navbar />
     <Routes>
       <Route path="/" element={<Dashboard />} />
+      <Route path="/past-summaries" element={<PastSummaries />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
     </Routes>

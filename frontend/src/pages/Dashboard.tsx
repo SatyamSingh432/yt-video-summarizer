@@ -1,9 +1,7 @@
 import { useState } from "react";
-
 import { useAuth } from "../context/AuthContext";
-import { checkYouTubeVideoExists } from "../utils/checkYouTubeVideoExists.ts";
-import { isValidYouTubeUrl } from "../utils/isValidYouTubeUrl.ts";
-
+import { checkYouTubeVideoExists } from "../utils/checkYouTubeVideoExists";
+import { isValidYouTubeUrl } from "../utils/isValidYouTubeUrl";
 import VideoInput from "../components/VideoInput";
 import VideoMetadata from "../components/VideoMetadata";
 import { api } from "../lib/api";
@@ -18,7 +16,6 @@ export default function Dashboard() {
   const [metaData, setMetaData] = useState<VideoMetadata | null>(null);
   const [loading, setLoading] = useState(false);
   const [summary, setSummary] = useState<string | null>(null);
-
   const { token } = useAuth();
 
   const getVideoMetaData = async (
@@ -64,25 +61,30 @@ export default function Dashboard() {
         },
       }
     );
-    console.log(data);
     setSummary(data.summary);
     setLoading(false);
   };
 
   return (
-    <div>
+    <div className="p-4 max-w-2xl mx-auto">
       <VideoInput loading={loading} getVideoMetaData={getVideoMetaData} />
       {metaData && (
-        <VideoMetadata
-          getVideoSummary={getVideoSummary}
-          thumbnail={metaData?.thumbnail}
-          title={metaData?.title}
-          duration={metaData?.duration}
-          loading={loading}
-        />
+        <div className="mt-6">
+          <VideoMetadata
+            getVideoSummary={getVideoSummary}
+            thumbnail={metaData?.thumbnail}
+            title={metaData?.title}
+            duration={metaData?.duration}
+            loading={loading}
+          />
+        </div>
       )}
-
-      {summary}
+      {summary && (
+        <div className="mt-8 bg-white rounded-xl shadow p-4 text-gray-800 whitespace-pre-line">
+          <h4 className="text-lg font-semibold mb-2">Summary</h4>
+          <p className="text-sm leading-relaxed">{summary}</p>
+        </div>
+      )}
     </div>
   );
 }
