@@ -5,8 +5,10 @@ import mongoose from "mongoose";
 import axios from "axios";
 
 import infoRouter from "./routes/videoinfo.routes.ts";
+
 dotenv.config();
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
