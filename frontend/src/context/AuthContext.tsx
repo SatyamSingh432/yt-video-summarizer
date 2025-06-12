@@ -29,17 +29,14 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const getAuthState = async () => {
     try {
       const data = await getUserData(token);
-      console.log(data);
       if (data) {
         setIsLoggedIn(true);
         setUser(data);
-        // getUserData();
       } else {
-        console.log("WHYY");
         navigate("/login");
       }
-      // eslint-disable-next-line no-unused-vars
     } catch (error) {
+      console.error("Error", error);
       navigate("/login");
 
       // toast.error(error.message);

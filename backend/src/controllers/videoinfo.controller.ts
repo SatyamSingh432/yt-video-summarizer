@@ -55,7 +55,7 @@ export const getVideoSummary = async (req: Request, res: Response) => {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "google/gemma-3-4b",
+      model: process.env.MODEL_NAME!,
       messages: [
         {
           role: "system",

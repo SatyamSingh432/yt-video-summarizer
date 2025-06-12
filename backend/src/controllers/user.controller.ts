@@ -3,7 +3,6 @@ import Summary from "../models/summary.model.ts";
 import User from "../models/user.model.ts";
 
 const getUserSummaries = async (req: Request, res: Response) => {
-  console.log("Fetching user summaries for user ID:", req.userId);
   try {
     const summaries = await Summary.find({ user: req.userId }).sort({
       createdAt: -1,
