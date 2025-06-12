@@ -37,11 +37,11 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
         // getUserData();
       } else {
         console.log("WHYY");
-        navigate("/signup");
+        navigate("/login");
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      navigate("/signup");
+      navigate("/login");
 
       // toast.error(error.message);
     }
@@ -78,6 +78,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     localStorage.removeItem("token");
     setToken("");
     setUser(null);
+    navigate("/login");
   };
 
   return (

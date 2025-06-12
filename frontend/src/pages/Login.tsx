@@ -24,6 +24,10 @@ export default function Login() {
     }
   };
 
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+
   return (
     <div>
       <input
@@ -38,6 +42,8 @@ export default function Login() {
         placeholder="Password"
       />
       <button onClick={handleLogin}>Login</button>
+
+      <button onClick={handleSignup}>Sign Up</button>
     </div>
   );
 }
