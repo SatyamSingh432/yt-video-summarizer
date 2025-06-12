@@ -1,7 +1,7 @@
 import express from "express";
 
-import { authenticate } from "../middlewares/authenticate.ts";
-import { login, signUp, userData } from "../controllers/auth.controller.ts";
+import { authenticate } from "../middlewares/authenticate.js";
+import { login, signUp, userData } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 

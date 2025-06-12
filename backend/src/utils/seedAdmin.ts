@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import User from "../models/user.model.ts";
+import User from "../models/user.model.js";
 
 export async function seedAdmin() {
   const adminEmail = "admin@admin.com";

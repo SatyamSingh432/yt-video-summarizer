@@ -1,4 +1,3 @@
-import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
@@ -11,7 +10,7 @@ export default function Navbar() {
       </h1>
       {user && (
         <div className="flex items-center gap-3">
-          {user.role === "admin" && (
+          {user?.role === "admin" && (
             <Link
               to="/admin"
               className="px-4 py-2 text-sm text-white bg-gray-800 rounded-lg hover:bg-gray-900 transition-colors"

@@ -7,8 +7,9 @@ import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
 import PastSummaries from "./pages/PastSummaries";
 import AdminDashboard from "./pages/AdminDashboard";
+import type { ReactElement } from "react";
 
-function AdminRoute({ children }) {
+function AdminRoute({ children }: { children: ReactElement }) {
   const { user } = useAuth();
   return user && user.role === "admin" ? children : <Navigate to="/" />;
 }

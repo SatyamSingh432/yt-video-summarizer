@@ -1,8 +1,12 @@
 import type { Request, Response } from "express";
-import Summary from "../models/summary.model.ts";
-import User from "../models/user.model.ts";
+import Summary from "../models/summary.model.js";
+import User from "../models/user.model.js";
 
-const getUserSummaries = async (req: Request, res: Response) => {
+interface AuthenticatedRequest extends Request {
+  userId?: string;
+}
+
+const getUserSummaries = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const summaries = await Summary.find({ user: req.userId }).sort({
       createdAt: -1,
@@ -27,7 +31,7 @@ const getAllUsersData = async (req: Request, res: Response) => {
 
     const userData = users.map((user) => ({
       ...user.toObject(),
-      usageCount: usageMap[user._id] || 0,
+      usageCount: usageMap[user._id.toString()] || 0,
     }));
 
     res.json(userData);

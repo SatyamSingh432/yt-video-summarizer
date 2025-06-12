@@ -2,9 +2,18 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../lib/api";
 
+export type Summary = {
+  _id: string;
+  user: string;
+  title: string;
+  text: string;
+  createdAt: string;
+  updatedAt?: string;
+};
+
 export default function PastSummaries() {
   const { token } = useAuth();
-  const [summaries, setSummaries] = useState([]);
+  const [summaries, setSummaries] = useState<Summary[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

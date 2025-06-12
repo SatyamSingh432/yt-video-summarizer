@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth, type User } from "../context/AuthContext";
 import { api } from "../lib/api";
 
 export default function AdminDashboard() {
   const { token } = useAuth();
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -51,7 +51,10 @@ export default function AdminDashboard() {
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <tr key={user._id} className="border-t text-sm text-gray-800">
+                  <tr
+                    key={user?._id}
+                    className="border-t text-sm text-gray-800"
+                  >
                     <td className="px-4 py-2">{user.email}</td>
                     <td className="px-4 py-2 capitalize">{user.role}</td>
                     <td className="px-4 py-2">{user.usageCount}</td>

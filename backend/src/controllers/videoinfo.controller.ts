@@ -1,8 +1,9 @@
 import axios from "axios";
 import type { Request, Response } from "express";
 import OpenAI from "openai";
-import Summary from "../models/summary.model.ts";
-import User from "../models/user.model.ts";
+
+import Summary from "../models/summary.model.js";
+import User from "../models/user.model.js";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -45,7 +46,14 @@ export const getVideoInfo = async (req: Request, res: Response) => {
   }
 };
 
-export const getVideoSummary = async (req: Request, res: Response) => {
+interface AuthenticatedRequest extends Request {
+  userId?: string;
+}
+
+export const getVideoSummary = async (
+  req: AuthenticatedRequest,
+  res: Response
+) => {
   const { transcript, videoTitle } = req.body;
   const userId = req.userId;
 

@@ -8,29 +8,35 @@ import React, {
 import { api } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
+export type User = {
+  _id: string;
+  email: string;
+  role: "free" | "premium" | "admin";
+  summaries: string[];
+  __v: number;
+  usageCount?: number;
+};
+
 type AuthContextType = {
   token: string;
-  user: object | null;
+  user: User | null;
   logout: () => void;
   setAuthToken: (token: string) => void;
-  setUser: React.Dispatch<React.SetStateAction<object | null>>;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   getUserData: (authToken: string) => Promise<any>;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   const getAuthState = async () => {
     try {
       const data = await getUserData(token);
       if (data) {
-        setIsLoggedIn(true);
         setUser(data);
       } else {
         navigate("/login");
@@ -55,10 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
       } else {
         return null;
       }
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      // toast.error(error.message);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

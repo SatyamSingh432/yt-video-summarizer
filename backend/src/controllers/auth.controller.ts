@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import User from "../models/user.model.ts";
+import User from "../models/user.model.js";
 
 export const signUp = async (req: Request, res: Response) => {
   try {
@@ -51,7 +51,11 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const userData = async (req: Request, res: Response) => {
+interface AuthenticatedRequest extends Request {
+  userId?: string;
+}
+
+export const userData = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = await User.findById(req.userId).select("-password");
     if (!user) res.status(404).json({ error: "User not found" });

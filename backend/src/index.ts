@@ -2,12 +2,11 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
-import axios from "axios";
 
-import infoRouter from "./routes/videoinfo.routes.ts";
-import authRouter from "./routes/auth.route.ts";
-import userRouter from "./routes/user.route.ts";
-import { seedAdmin } from "./utils/seedAdmin.ts";
+import infoRouter from "./routes/videoinfo.routes.js";
+import authRouter from "./routes/auth.route.js";
+import userRouter from "./routes/user.route.js";
+import { seedAdmin } from "./utils/seedAdmin.js";
 
 // dotenv.config();
 const app = express();
