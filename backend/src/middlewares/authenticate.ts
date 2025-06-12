@@ -4,7 +4,6 @@ import express, {
   type Response,
 } from "express";
 import jwt from "jsonwebtoken";
-// import User from "../models/user.model.js";
 
 const router = express.Router();
 
@@ -12,7 +11,7 @@ const router = express.Router();
 function authenticate(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized" });
   }
 
   const token = authHeader?.split(" ")[1];
@@ -22,7 +21,7 @@ function authenticate(req: Request, res: Response, next: NextFunction) {
     req.userId = decoded.id;
     next();
   } catch (err) {
-    res.status(401).json({ error: "Invalid token" });
+    return res.status(401).json({ error: "Invalid token" });
   }
 }
 

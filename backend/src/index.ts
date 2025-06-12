@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import axios from "axios";
 
 import infoRouter from "./routes/videoinfo.routes.ts";
+import authRouter from "./routes/auth.route.ts";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
   res.send("sgrgt");
 });
 app.use("/api", infoRouter);
+app.use("/api/auth", authRouter);
 
 const PORT = parseInt(process.env.PORT || "8080", 10);
 

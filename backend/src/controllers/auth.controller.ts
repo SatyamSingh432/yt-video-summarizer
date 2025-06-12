@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import User from "../models/user.model.js";
+import User from "../models/user.model.ts";
 
 export const signUp = async (req: Request, res: Response) => {
   try {
@@ -16,7 +16,7 @@ export const signUp = async (req: Request, res: Response) => {
     const user = new User({ email, password: hashedPassword });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!);
     res.status(201).json({ token });
   } catch (err) {
     console.error(err);
