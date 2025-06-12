@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 
 import Navbar from "./components/Navbar";
 import PastSummaries from "./pages/PastSummaries";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const App = () => (
   <>
@@ -15,6 +16,7 @@ const App = () => (
       <Route path="/past-summaries" element={<PastSummaries />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/admin" element={<AdminDashboard />} />
     </Routes>
   </>
 );

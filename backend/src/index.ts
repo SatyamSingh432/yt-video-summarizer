@@ -7,6 +7,7 @@ import axios from "axios";
 import infoRouter from "./routes/videoinfo.routes.ts";
 import authRouter from "./routes/auth.route.ts";
 import userRouter from "./routes/user.route.ts";
+import { seedAdmin } from "./utils/seedAdmin.ts";
 
 // dotenv.config();
 const app = express();
@@ -23,8 +24,9 @@ app.use("/api/user", userRouter);
 
 const PORT = parseInt(process.env.PORT || "8080", 10);
 
-mongoose.connect(process.env.MONGO_URI!).then(() => {
+mongoose.connect(process.env.MONGO_URI!).then(async () => {
   console.log("Mongodb connected");
+  await seedAdmin();
   app.listen(PORT, () => {
     console.log(`Server listen at port ${PORT}`);
   });

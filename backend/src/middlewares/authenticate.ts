@@ -5,8 +5,6 @@ import express, {
 } from "express";
 import jwt from "jsonwebtoken";
 
-const router = express.Router();
-
 // Middleware to verify token
 function authenticate(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
