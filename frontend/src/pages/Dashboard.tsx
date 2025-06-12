@@ -67,7 +67,7 @@ export default function Dashboard() {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
-      <VideoInput loading={loading} getVideoMetaData={getVideoMetaData} />
+      <VideoInput getVideoMetaData={getVideoMetaData} />
       {metaData && (
         <div className="mt-6">
           <VideoMetadata
@@ -79,6 +79,12 @@ export default function Dashboard() {
           />
         </div>
       )}
+      {loading && (
+        <div className="flex justify-center mt-6">
+          <div className="w-6 h-6 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin"></div>
+        </div>
+      )}
+
       {summary && (
         <div className="mt-8 bg-white rounded-xl shadow p-4 text-gray-800 whitespace-pre-line">
           <h4 className="text-lg font-semibold mb-2">Summary</h4>

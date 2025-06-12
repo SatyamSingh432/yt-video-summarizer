@@ -5,13 +5,9 @@ type VideoInputProps = {
     e: React.FormEvent<HTMLFormElement>,
     url: string
   ) => Promise<void>;
-  loading: boolean;
 };
 
-export default function VideoInput({
-  getVideoMetaData,
-  loading,
-}: VideoInputProps) {
+export default function VideoInput({ getVideoMetaData }: VideoInputProps) {
   const [url, setUrl] = useState("");
 
   return (
@@ -44,7 +40,6 @@ export default function VideoInput({
           Get Data
         </button>
       </form>
-      {loading && <div className="mt-4 text-sm text-gray-600">Loading…</div>}
     </div>
   );
 }
