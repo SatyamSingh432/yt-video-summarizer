@@ -1,15 +1,27 @@
-import React from "react";
-import { useSummaries } from "../context/SummaryContext";
-import SummaryCard from "../components/SummaryCard";
+import React, { useState } from "react";
+
+import VideoInput from "../components/VideoInput";
+import VideoMetadata from "../components/VideoMetadata";
+
+export type VideoMetadata = {
+  title: string;
+  thumbnail: string;
+  duration: string;
+};
 
 export default function Dashboard() {
-  const { summaries } = useSummaries();
+  const [metaData, setMetaData] = useState<VideoMetadata | null>(null);
 
   return (
     <div>
-      {summaries.map((s, i) => (
-        <SummaryCard key={i} {...s} />
-      ))}
+      <VideoInput setMetaData={setMetaData} />
+      {metaData && (
+        <VideoMetadata
+          thumbnail={metaData?.thumbnail}
+          title={metaData?.title}
+          duration={metaData?.duration}
+        />
+      )}
     </div>
   );
 }
