@@ -1,12 +1,17 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-
 import Navbar from "./components/Navbar";
 import PastSummaries from "./pages/PastSummaries";
 import AdminDashboard from "./pages/AdminDashboard";
+
+function AdminRoute({ children }) {
+  const { user } = useAuth();
+  return user && user.role === "admin" ? children : <Navigate to="/" />;
+}
 
 const App = () => (
   <>
@@ -16,7 +21,14 @@ const App = () => (
       <Route path="/past-summaries" element={<PastSummaries />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/admin" element={<AdminDashboard />} />
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        }
+      />
     </Routes>
   </>
 );
