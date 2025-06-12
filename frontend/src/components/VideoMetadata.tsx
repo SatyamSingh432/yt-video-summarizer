@@ -1,3 +1,6 @@
+import { useAuth } from "../context/AuthContext";
+import { api } from "../lib/api";
+
 type VideoMetadataProps = {
   title: string | undefined;
   thumbnail: string | undefined;
@@ -17,6 +20,7 @@ export default function VideoMetadata({
   thumbnail,
   duration,
 }: VideoMetadataProps) {
+  const { token } = useAuth();
   return (
     <div
       style={{
@@ -34,7 +38,24 @@ export default function VideoMetadata({
       <h3 style={{ margin: "0.5rem 0" }}>{title}</h3>
       {duration && <p>Duration: {formatDuration(duration)}</p>}
 
-      <button onClick={() => console.log("Summarize")}>Summarize</button>
+      <button
+        onClick={() => {
+          api.post(
+            "video/summarize",
+            {
+              transcript: title,
+              videoTitle: title,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+        }}
+      >
+        Summarize
+      </button>
     </div>
   );
 }

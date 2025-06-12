@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { api } from "../lib/api";
 
 import type { VideoMetadata } from "../pages/Dashboard";
+import { useAuth } from "../context/AuthContext";
 
 export default function VideoInput({
   setMetaData,
@@ -10,6 +11,7 @@ export default function VideoInput({
 }) {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const { token } = useAuth();
 
   async function checkYouTubeVideoExists(url: string): Promise<boolean> {
     try {
@@ -55,7 +57,15 @@ export default function VideoInput({
       const videoExist = await checkYouTubeVideoExists(url);
 
       if (videoExist && videoId) {
-        const { data } = await api.post("/video/videoinfo", { videoId });
+        const { data } = await api.post(
+          "/video/videoinfo",
+          { videoId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setMetaData(data);
         setUrl("");
       }

@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import "dotenv/config";
 import mongoose from "mongoose";
 import axios from "axios";
 
 import infoRouter from "./routes/videoinfo.routes.ts";
 import authRouter from "./routes/auth.route.ts";
 
-dotenv.config();
+// dotenv.config();
 const app = express();
 
 app.use(cors());
@@ -16,7 +16,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("sgrgt");
 });
-app.use("/api", infoRouter);
+app.use("/api/video", infoRouter);
 app.use("/api/auth", authRouter);
 
 const PORT = parseInt(process.env.PORT || "8080", 10);
